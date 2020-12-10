@@ -30,7 +30,8 @@ void main() {
     addedLights.rgb += 0.25 * vec3(1.0, 1.0, 1.0);
 
     //vec3 color = vec3( vec3(0.7, 0.025, 0.1) * ( 1.0 - 2.0 * noise ));
-    gl_FragColor = vec4(addedLights.x * color.x, addedLights.y * color.y, addedLights.z * color.z, 1.0);
+    //gl_FragColor = vec4(addedLights.x * color.x, addedLights.y * color.y, addedLights.z * color.z, 1.0);
+    gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);
 }
 
 

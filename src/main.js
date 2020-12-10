@@ -26,7 +26,7 @@ analyser.smoothingTimeConstant = 0.3;
 analyser.fftSize = 1024; //there are (fftSize/2) bins when getByteFrequencyData(array) is called
 var xhr = new XMLHttpRequest();
 xhr.responseType = 'arraybuffer';
-xhr.open('GET', 'https://echiu1997.github.io/musicvisualizer/testing.mp3', true);
+xhr.open('GET', 'https://echiu.github.io/musicvisualizer/testing.mp3', true);
 xhr.onload = function() {
   context.decodeAudioData(this.response, function(buffer) {
     source.connect(analyser);
@@ -49,14 +49,16 @@ var material = new THREE.ShaderMaterial( {
             amp: { type: "f", value: 10.0 }
         }
     ]),
-    vertexShader: require('./shaders/iridescence.glsl'),
-    fragmentShader: require('./shaders/iridescence.glsl')
+    vertexShader: require('./shaders/adam-vert.glsl'),
+    fragmentShader: require('./shaders/adam-frag.glsl')
 } );
 
+
 // create a sphere and assign the material
-var mesh = new THREE.Mesh( 
+var mesh = new THREE.Points( 
     new THREE.IcosahedronGeometry( 15, 5 ), 
-    material 
+    material
+    //new THREE.PointsMaterial( { size: 1, sizeAttenuation: false } ) 
 );
 
 //decides if your domain has permission to use the image and if you do have permission it sends certain headers back to the browser. 
@@ -66,7 +68,7 @@ THREE.ImageUtils.crossOrigin = '';
 var sky = new THREE.Mesh(
   new THREE.SphereGeometry(90, 64, 64), 
   new THREE.MeshBasicMaterial({
-    map: THREE.ImageUtils.loadTexture('https://echiu1997.github.io/musicvisualizer/mars7.png'), 
+    map: THREE.ImageUtils.loadTexture('https://echiu.github.io/musicvisualizer/mars7.png'), 
     side: THREE.BackSide
   })
 );
@@ -87,7 +89,7 @@ function onLoad(framework) {
   // var {scene, camera, renderer, gui, stats} = framework; 
 
   scene.add( mesh );
-  scene.add( sky );
+  //scene.add( sky );
   scene.add( light );
 
   /*
