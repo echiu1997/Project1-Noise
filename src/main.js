@@ -34,8 +34,8 @@ var material = new THREE.ShaderMaterial({
     //float initialized to 25
     amp: { type: "f", value: 5.0 }
   },
-  vertexShader: __webpack_require__(5),
-  fragmentShader: __webpack_require__(6)
+  vertexShader: require('./shaders/adam-vert.glsl'),
+  fragmentShader: require('./shaders/adam-frag.glsl')
 });
 
 // creates sphere and assigns material
