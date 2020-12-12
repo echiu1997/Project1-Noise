@@ -1,13 +1,13 @@
 
 const THREE = require('three');
 const OrbitControls = require('three-orbit-controls')(THREE)
-import Stats from 'stats-js'
-import DAT from 'dat-gui'
+/* import Stats from 'stats-js'
+import DAT from 'dat-gui' */
 
 // when the scene is done initializing, the function passed as `callback` will be executed
 // then, every frame, the function passed as `update` will be executed
 function init(callback, update) {
-  var stats = new Stats();
+  /* var stats = new Stats();
   stats.setMode(1);
   stats.domElement.style.position = 'absolute';
   stats.domElement.style.left = '0px';
@@ -15,10 +15,10 @@ function init(callback, update) {
   document.body.appendChild(stats.domElement);
 
   var gui = new DAT.GUI();
-
+ */
   var framework = {
-    gui: gui,
-    stats: stats
+    /* gui: gui,
+    stats: stats */
   };
 
   // run this function after the window loads
@@ -31,15 +31,17 @@ function init(callback, update) {
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setClearColor(0x020202, 0);
 
-    var controls = new OrbitControls(camera, renderer.domElement);
+    //allows interaction with the sphere
+/*     var controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.enableZoom = true;
     controls.target.set(0, 0, 0);
     controls.rotateSpeed = 0.3;
     controls.zoomSpeed = 1.0;
-    controls.panSpeed = 2.0;
+    controls.panSpeed = 2.0; */
 
-    document.body.appendChild(renderer.domElement);
+    className = document.getElementsByClassName("interactive threejs")
+    className.appendChild(renderer.domElement);
 
     // resize the canvas when the window changes
     window.addEventListener('resize', function() {
@@ -55,10 +57,10 @@ function init(callback, update) {
 
     // begin the animation loop
     (function tick() {
-      stats.begin();
+      /* stats.begin(); */
       update(framework); // perform any requested updates
       renderer.render(scene, camera); // render the scene
-      stats.end();
+      /* stats.end(); */
       requestAnimationFrame(tick); // register to call this again when the browser renders a new frame
     })();
 
