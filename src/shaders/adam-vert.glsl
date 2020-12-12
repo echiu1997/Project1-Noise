@@ -103,14 +103,14 @@ float multioctave_noise(vec3 pos) {
 //for more given uniform variables, go to:
 //https://threejs.org/docs/api/renderers/webgl/WebGLProgram.html
 
-//varying vec2 vUv;
+// Variables to pass to fragment shader.
 varying float noise;
 varying vec3 normColor;
 varying vec3 vecPos;
 varying vec3 vecNormal;
 
+// Received from main to vertex shader.
 uniform float time;
-uniform float freq; //ranges from 0 to 255
 uniform float amp;
 
 float turbulence( vec3 p ) {
@@ -127,20 +127,14 @@ void main() {
     vec3 pointNormal = normalize(position);
     // add time to the noise parameters so it's animated
     noise = 10.0 *  -0.10 * turbulence( 0.5 * pointNormal + time );
-    // amp can be changed to by slider to change magnitude of fluctuation
-    float b = amp * freq * multioctave_noise( 0.05 * position + vec3( 2.0 * time ) );
+    float b = amp * multioctave_noise( 0.05 * position + vec3( 2.0 * time ) );
     float displacement = - noise + b;
     
     vec3 newPosition = position + pointNormal * displacement;
     gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, 1.0);
-    gl_PointSize = 1.0;
-    //passing to fragment shader
-    //vUv = uv;
+    gl_PointSize = 2.0;
+
     normColor = vec3( 0.6*abs(pointNormal.x), 0.6*abs(pointNormal.y), 0.6*abs(pointNormal.z) );
     vecPos = (modelMatrix * vec4(newPosition, 1.0)).xyz;
-    vecNormal = normalMatrix * pointNormal;
-
-    //rotate light along with blob
-    //vecPos = newPosition;
-    //vecNormal = normal;
+    vecNormal = pointNormal;
 }
